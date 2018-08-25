@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>smarticle particles</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <style>
+
+        @import url('https://fonts.googleapis.com/css?family=Baloo+Da');
+            
+            body{
+                background-color: black;
+                color: white;
+                text-align: center;
+            }
+
+            div{
+                position: relative;
+                /*background: #3949AB;*/
+                font-family: 'Amatic SC';
+                border:2px;
+                border-color: #3949AB;
+            }
+
+            #btn{
+                position: relative;
+                border:2px;
+                border-color: #3949AB;
+                /*background: #3949AB;*/
+                font-family: 'Baloo Da';
+                /*font-weight: bold;*/
+                font-style: oblique;
+                font-size: 30px;
+                top: 22px;
+                /*width: 200px;*/
+                display: inline;
+                letter-spacing: 1px;
+                padding: 7px;
+                /*padding-left: 12px;
+                padding-right: 12px;*/
+                cursor: pointer;
+
+
+            }
+
+        </style>
+
+    </head>
+    
+    <body>
+    
+    <center>
+    
+    <div id='btn'><span>click me</span></div><br><br><br> 
+
+    <canvas id ='river' height ="500" width ="1270"></canvas>
+    
+    </center>
+    
+    </body>
+
+        <script>
+
+        var canvas = document.getElementById('river');
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = "#00E1FF";
+        var abc = Math.floor(Math.random() * (100) + 1);
+        setInterval(start, 20, abc);
+        var userX = 0;
+        var userY = 0;
+        var clickCounter = 0;
+
+        //river.addEventListener('click', function (e) {
+        // 	userY = e.clientY;
+        //    userX = e.clientX;
+        //}
+        //);
+        
+        document.getElementById("btn").addEventListener("click", function(e) {
+            
+            if(clickCounter % 2 == 0){
+                userY = e.clientY;
+                userX = e.clientX;
+            }
+            
+            else if(Math.abs(clickCounter % 2) == 1){
+                location.reload(false);
+            }
+            clickCounter++;
+        }
+        );
+
+        var trigVar = 0;
+        var userClick = 0;
+        var clickX = 0;
+        var clickY = 0;
+
+        function start(abc){
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            num = 5; 
+           
+           if(userClick > 0){
+               userClick -= 0.5;
+           }
+           else if((userX > 0) && (userY > 0) && (userClick == 0)){
+                   userClick = 100;
+                   clickY = userY;
+                   clickX = userX;
+                   clickX = 0;
+                   clickY = 0;
+           }
+
+            for (var ii = num + 10; ii <= river.height; ii += num + 10){
+            	for (var i = num + 10; i <= river.width + 920; i += num + 10){
+                    var y = clickY - ii;
+            		var x = clickX - i;
+                    x = Math.pow(x, 2);
+                    y = Math.pow(y, 2);
+            		o = Math.sqrt(x + y);
+
+                ctx.beginPath();
+
+                var a = i/(o);
+                ctx.arc(i + Math.sin(trigVar)*(100 + a*userClick), ii + Math.cos(trigVar)*(a*userClick), 1, 0, 2*Math.PI);
+                    ctx.fill();
+                    trigVar += Math.PI/(abc);
+                }
+            }
+        }
+    </script>
+</html>
