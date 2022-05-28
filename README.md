@@ -1,6 +1,6 @@
 # smarticle particles
 
-**You can check out the project here: [smarticle particles](moinizzle.github.io/particles/)**
+**You can check out the project here: [smarticle particles](https://moinizzle.github.io/particles/)**
 
 ![1](https://github.com/irfanmoi/particles/blob/master/gifs/1.gif)
 
